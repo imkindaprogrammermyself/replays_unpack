@@ -1,28 +1,27 @@
-[![Build Status](https://travis-ci.org/Monstrofil/replays_unpack.svg?branch=master)](https://travis-ci.org/Monstrofil/replays_unpack)
+# Replays Unpack (.NET 10)
 
-# Replay Parser (WoT & WoWS)
+This repository has been migrated to a C#/.NET 10 codebase.
 
-The other one project that aims to decode replay files and provide ability to "play"
-them without game client. Project provides public API that allows you to create your own
-"client" which handles game events and does whatever you want (collect data and return json, 
-create images and animations, etc).
+## Projects
 
-Here is an example of what data can be retrived:
-![cool anumation with tanks](docs/files/animation.gif)
+- `src/ReplaysUnpack` - core library with replay reader, parser, and bit reader.
+- `src/ReplaysUnpack.Cli` - CLI entry point (`--replay <path>`).
+- `tests/ReplaysUnpack.Tests` - xUnit tests for core behavior.
 
-## Similar Projects
+## Build
 
-- https://github.com/evido/wotreplay-parser (C++)
-- https://github.com/Aimdrol/WoT-Replay-Analyzer (exe only)
-- https://github.com/Phalynx/WoT-Replay-To-JSON (Python)
-- https://gist.github.com/benvanstaveren/2402016 (Perl)
-- https://github.com/thesilvervestgroup/wot-replay-parser (PHP)
+```bash
+dotnet build ReplaysUnpack.sln
+```
 
+## Test
 
-## Why this one is better
-- Fully reimplemented BigWorld client-server protocol used in replays;
-- more than 9 completely parsed [packets](docs/Packets.md);
-- great support of entities: methods [calls](docs/Packets/0x8.md), properties [change](docs/Packets/0x8.md) 
-  (including [nested](docs/Packets/0x22.md) properties) without any hardcode: 
-  we use .def files from game client to get subpacket ids;
-- extendability and flexibility by providing public api (see examples).
+```bash
+dotnet test ReplaysUnpack.sln
+```
+
+## Run
+
+```bash
+dotnet run --project src/ReplaysUnpack.Cli -- --replay <path-to-replay>
+```
